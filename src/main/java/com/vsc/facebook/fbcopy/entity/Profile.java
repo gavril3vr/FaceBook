@@ -1,84 +1,65 @@
-package facebook.entity;
+package com.vsc.facebook.fbcopy.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "post")
-public class Post {
-
+@Table(name = "profiles")
+public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private long userId;
+    @Column(name = "full_Name")
+    private String fullName;
 
-    @Column(name = "image_id", nullable = false)
-    private long imageId;
+    @Column(name = "is_full_name_public")
+    private boolean isFullNamePublic;
 
-    @Column(name = "text")
-    private String text;
+    @Column(name = "profile_image")
+    @OneToOne
+    private Image profileImage;
 
-    @Column(name = "number_of_likes", nullable = false)
-    private long numberOfLikes;
+    @Column(name = "user")
+    @OneToOne
+    private User user;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    private User poster;
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public User getPoster() {
-        return poster;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setPoster(User poster) {
-        this.poster = poster;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public Post() {
+    public boolean isFullNamePublic() {
+        return isFullNamePublic;
     }
 
-    public long getId() {
-        return id;
+    public void setFullNamePublic(boolean fullNamePublic) {
+        isFullNamePublic = fullNamePublic;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public Image getProfileImage() {
+        return profileImage;
     }
 
-    public long getUserId() {
-        return userId;
+    public void setProfileImage(Image profileImage) {
+        this.profileImage = profileImage;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public User getUser() {
+        return user;
     }
 
-    public long getImageId() {
-        return imageId;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public void setImageId(long imageId) {
-        this.imageId = imageId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public long getNumberOfLikes() {
-        return numberOfLikes;
-    }
-
-    public void setNumberOfLikes(long numberOfLikes) {
-        this.numberOfLikes = numberOfLikes;
-    }
-
 }
