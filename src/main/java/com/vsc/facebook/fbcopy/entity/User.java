@@ -1,45 +1,167 @@
-package facebook.entity;
+package com.vsc.facebook.fbcopy.entity;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+    @Column(name = "email", nullable = false,unique = true)
+    private String email;
 
-    @Column(name = "second_name", nullable = false)
-    private String secondName;
+    @Column(name = "password",nullable = false,unique = true)
+    private String password;
 
-    @Column(name = "phone_number", unique = true)
-    private String phoneNumber;
+    @Column(name = "is active",nullable = false,unique = true)
+    private boolean isActive;
 
-    @Column(name = "date_of_birth")
-    private String dateOfBirth;
+    @ManyToMany
+    private Set<Role> authorities;
 
-    @Column(name = "profile_picture", unique = true)
-    private String profilePicture; //This string will store the path to the picture
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
 
-    @Column(name = "back_picture", unique = true)
-    private String backPicture;
+    @OneToMany
+    private Set<Image> images;
 
-    //Тука няма да има нищо предполагам
-    //Остават приятелите и снимките
+    @ManyToMany
+    private Set<User> friends;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "poster")
+    @ManyToMany
+    private Set<User> blockedUsers;
+
+    @Column(name = "register_date")
+    private Date registerDate;
+
+    @OneToMany
     private Set<Post> posts;
 
-    public void setId(Long id) {
+    @ManyToMany
+    private Set<Post> likedPosts;
+
+    @ManyToMany
+    private Set<Post> sharedPosts;
+
+    @OneToMany
+    private Set<Post> comments;
+
+    public User() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    @Override
+    public Set<Role> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
+    public Set<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
+    }
+
+    public Set<User> getBlockedUsers() {
+        return blockedUsers;
+    }
+
+    public void setBlockedUsers(Set<User> blockedUsers) {
+        this.blockedUsers = blockedUsers;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 
     public Set<Post> getPosts() {
@@ -50,62 +172,27 @@ public class User {
         this.posts = posts;
     }
 
-    public User() {
+    public Set<Post> getLikedPosts() {
+        return likedPosts;
     }
 
-    public long getId() {
-        return id;
+    public void setLikedPosts(Set<Post> likedPosts) {
+        this.likedPosts = likedPosts;
     }
 
-    public void setId(long id) {
-        id = id;
+    public Set<Post> getSharedPosts() {
+        return sharedPosts;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setSharedPosts(Set<Post> sharedPosts) {
+        this.sharedPosts = sharedPosts;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Set<Post> getComments() {
+        return comments;
     }
 
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public String getBackPicture() {
-        return backPicture;
-    }
-
-    public void setBackPicture(String backPicture) {
-        this.backPicture = backPicture;
+    public void setComments(Set<Post> comments) {
+        this.comments = comments;
     }
 }
