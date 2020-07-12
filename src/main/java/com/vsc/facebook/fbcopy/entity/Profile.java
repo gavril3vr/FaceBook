@@ -15,13 +15,9 @@ public class Profile {
     @Column(name = "is_full_name_public")
     private boolean isFullNamePublic;
 
-    @Column(name = "profile_image")
     @OneToOne
+    @JoinColumn(name = "image_id")
     private Image profileImage;
-
-    @Column(name = "user")
-    @OneToOne
-    private User user;
 
     public Long getId() {
         return id;
@@ -55,11 +51,4 @@ public class Profile {
         this.profileImage = profileImage;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

@@ -4,32 +4,35 @@ import javax.persistence.*;
 
 
 @Entity
-    @Table(name = "images")
-    public class Image {
+@Table(name = "images")
+public class Image {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @Column
-        private String url;
+    @Column
+    private String url;
 
-        public Image() {
-        }
+    @ManyToOne(targetEntity = User.class, optional = false)
+    private User user;
 
-        public Long getId() {
-            return id;
-        }
+    public Image() {
+    }
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public String getUrl() {
-            return url;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public void setUrl(String url) {
-            this.url = url;
-        }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

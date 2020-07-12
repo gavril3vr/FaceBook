@@ -19,19 +19,25 @@ public class Post {
     @Column(name = "post", nullable = false)
     private String post;
 
-    @Column(name = "postDate", nullable = false)
+    @Column(name = "post_date", nullable = false)
     private String postDate;
 
     @ManyToOne(targetEntity = Post.class, optional = false)
     private Post parent;
 
     @ManyToMany
+    @JoinTable(name = "post_users",
+            joinColumns = { @JoinColumn(name = "post_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") })
     private Set<User> likes;
 
     @ManyToMany
+    @JoinTable(name = "post_users",
+            joinColumns = { @JoinColumn(name = "post_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") })
     private Set<User> shares;
 
-    @OneToMany
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private Set<Post> comments;
 
     public Post() {
