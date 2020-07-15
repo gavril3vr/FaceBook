@@ -1,10 +1,40 @@
 package com.vsc.facebook.fbcopy.service.implementation;
 
+import com.vsc.facebook.fbcopy.dto.RegisterDTO;
+import com.vsc.facebook.fbcopy.entity.User;
+import com.vsc.facebook.fbcopy.repository.UserRepository;
+import com.vsc.facebook.fbcopy.service.contract.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
+
+    private final UserRepository userRepository;
+    private final RoleServiceImpl roleService;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, RoleServiceImpl roleService, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public User register(RegisterDTO registerDTO) {
+        if (!registerDTO.getPassword().equals(registerDTO.getPasswordRepeat())) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+        User user = new User();
+
+            //TODO user !
+
+        return user;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
