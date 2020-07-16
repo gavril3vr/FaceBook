@@ -81,9 +81,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "requested", fetch = FetchType.LAZY)
     private Set<FriendRequestEntity> otherRequest;
 
+    private String username = firstName+" "+lastName;
     public User() {
 
     }
+    public String setUsername(String username){return  username;}
 
     public String getFirstName() {
         return firstName;
@@ -156,7 +158,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override

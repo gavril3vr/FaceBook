@@ -1,6 +1,6 @@
 package com.vsc.facebook.fbcopy.entity;
 
-import javafx.scene.Parent;
+
 
 import javax.persistence.*;
 import java.util.Set;
