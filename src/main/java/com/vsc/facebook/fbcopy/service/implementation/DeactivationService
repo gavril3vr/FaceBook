@@ -1,0 +1,39 @@
+package com.vsc.facebook.fbcopy.service.implementation;
+
+import com.vsc.facebook.fbcopy.dto.DeactivationDTO;
+import com.vsc.facebook.fbcopy.entity.User;
+import com.vsc.facebook.fbcopy.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
+
+@Service
+public class DeactivationService {
+    private final UserRepository userRepository;
+    private final UserServiceImpl userService;
+
+    @Autowired
+    public DeactivationService(UserRepository userRepository, UserServiceImpl userService) {
+        this.userRepository = userRepository;
+        this.userService = userService;
+    }
+
+    public boolean isPassValid(DeactivationDTO deactivationDTO) {
+        User user = userRepository.findFirstByEmail(deactivationDTO.getEmail());
+        return user.getPassword().equals(deactivationDTO.getPasswordToBeChecked());
+    }
+
+    public void deactivateAccount(DeactivationDTO deactivationDTO, User user) {
+        if (isPassValid(deactivationDTO)) {
+            user.setActive(true);
+        } else user.setActive(false);
+    }
+
+    public ModelAndView returnMessage(DeactivationDTO deactivationDTO, User user) {
+        if (user.isActive()) {
+            return new ModelAndView("deactivationFailiure.html");
+        } else {
+            return new ModelAndView("deactivationSuccessful.html");
+        }
+    }
+}
