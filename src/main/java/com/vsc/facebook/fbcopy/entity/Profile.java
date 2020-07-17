@@ -22,6 +22,14 @@ public class Profile {
     @Column(name="is_active")
     private boolean isActive;
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public Long getId() {
         return id;
     }
