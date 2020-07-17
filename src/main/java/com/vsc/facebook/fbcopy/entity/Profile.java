@@ -18,6 +18,9 @@ public class Profile {
     @OneToOne
     @JoinColumn(name = "image_id")
     private Image profileImage;
+    
+    @Column(name="is_active")
+    private boolean isActive;
 
     public Long getId() {
         return id;
