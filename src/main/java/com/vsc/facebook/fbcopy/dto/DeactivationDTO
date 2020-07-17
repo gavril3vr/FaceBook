@@ -1,39 +1,31 @@
-package com.vsc.facebook.fbcopy.service.implementation;
+package com.vsc.facebook.fbcopy.dto;
 
-import com.vsc.facebook.fbcopy.dto.DeactivationDTO;
+
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.context.annotation.Bean;
 
-@Service
-public class DeactivationService {
-    private final UserRepository userRepository;
-    private final UserServiceImpl userService;
+public class DeactivationDTO {
 
-    @Autowired
-    public DeactivationService(UserRepository userRepository, UserServiceImpl userService) {
-        this.userRepository = userRepository;
-        this.userService = userService;
+    private String passwordToBeChecked;
+    private String email;
+
+    public DeactivationDTO() {
     }
 
-    public boolean isPassValid(DeactivationDTO deactivationDTO) {
-        User user = userRepository.findFirstByEmail(deactivationDTO.getEmail());
-        return user.getPassword().equals(deactivationDTO.getPasswordToBeChecked());
+    public String getPasswordToBeChecked() {
+        return passwordToBeChecked;
     }
 
-    public void deactivateAccount(DeactivationDTO deactivationDTO, User user) {
-        if (isPassValid(deactivationDTO)) {
-            user.setActive(true);
-        } else user.setActive(false);
+    public void setPasswordToBeChecked(String passwordToBeChecked) {
+        this.passwordToBeChecked = passwordToBeChecked;
     }
 
-    public ModelAndView returnMessage(DeactivationDTO deactivationDTO, User user) {
-        if (user.isActive()) {
-            return new ModelAndView("deactivationFailiure.html");
-        } else {
-            return new ModelAndView("deactivationSuccessful.html");
-        }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
