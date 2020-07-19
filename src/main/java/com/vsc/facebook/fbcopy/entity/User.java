@@ -14,15 +14,14 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "email", nullable = false,unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password",nullable = false,unique = true)
+    @Column(name = "password", nullable = false, unique = true)
     private String password;
 
-    @Column(name = "is active",nullable = false,unique = true)
+    @Column(name = "is_active", nullable = false, unique = true)
     private boolean isActive;
-
 
     @Column(name = "first_name", nullable = false, unique = true)
     private String firstName;
@@ -33,39 +32,60 @@ public class User implements UserDetails {
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+
     private Set<Role> authorities;
 
     @OneToOne
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Image> images;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "connections")
     private Set<User> friends;
 
     @ManyToMany
+    @JoinTable(name = "users_friends",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id")})
+    private Set<User> connections;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "blockedBy")
     private Set<User> blockedUsers;
+    @JoinTable(name = "blocked_users",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "blocked_user_id")})
+    @ManyToMany
+    private Set<User> blockedBy;
 
     @Column(name = "register_date")
     private Date registerDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "poster", fetch = FetchType.LAZY)
     private Set<Post> posts;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "likes", fetch = FetchType.LAZY)
     private Set<Post> likedPosts;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "shares", fetch = FetchType.LAZY)
     private Set<Post> sharedPosts;
 
-    @OneToMany
-    private Set<Post> comments;
+    @OneToMany(mappedBy = "requester", fetch = FetchType.LAZY)
+    private Set<FriendRequestEntity> requests;
+
+    @OneToMany(mappedBy = "requested", fetch = FetchType.LAZY)
+    private Set<FriendRequestEntity> otherRequest;
+
 
     public User() {
 
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -91,6 +111,30 @@ public class User implements UserDetails {
         this.age = age;
     }
 
+    public Set<User> getConnections() {
+        return connections;
+    }
+
+    public void setConnections(Set<User> connections) {
+        this.connections = connections;
+    }
+
+    public Set<User> getBlockedBy() {
+        return blockedBy;
+    }
+
+    public void setBlockedBy(Set<User> blockedBy) {
+        this.blockedBy = blockedBy;
+    }
+
+    public Set<FriendRequestEntity> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Set<FriendRequestEntity> requests) {
+        this.requests = requests;
+    }
+
     public long getId() {
         return id;
     }
@@ -114,35 +158,31 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return isActive;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     public void setActive(boolean active) {
@@ -222,11 +262,4 @@ public class User implements UserDetails {
         this.sharedPosts = sharedPosts;
     }
 
-    public Set<Post> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Post> comments) {
-        this.comments = comments;
-    }
 }

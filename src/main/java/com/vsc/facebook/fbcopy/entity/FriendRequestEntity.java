@@ -5,6 +5,7 @@ import com.vsc.facebook.fbcopy.enumaration.FriendRequestStatus;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "friend_requests")
 public class FriendRequestEntity {
 
     @Id
@@ -19,6 +20,12 @@ public class FriendRequestEntity {
         this.id = id;
         this.status = status;
     }
+
+    @ManyToOne( fetch = FetchType.LAZY)
+    private User requester;
+
+    @ManyToOne( fetch = FetchType.LAZY)
+    private User requested;
 
     public Long getId() {
         return id;

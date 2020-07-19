@@ -10,10 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
@@ -44,9 +45,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return user;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+        return userRepository.findFirstByEmail(s).orElseThrow(()-> new UsernameNotFoundException("User not found "));
     }
 }
+

@@ -3,6 +3,7 @@ package com.vsc.facebook.fbcopy.dto;
 import javax.validation.constraints.NotBlank;
 
 public class RegisterDTO {
+
     @NotBlank
     private String email;
 
@@ -11,6 +12,9 @@ public class RegisterDTO {
 
     @NotBlank
     private String passwordRepeat;
+
+    @NotBlank
+    private int age;
 
     public RegisterDTO() {
     }
@@ -22,6 +26,16 @@ public class RegisterDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
 
     public String getPassword() {
         return password;

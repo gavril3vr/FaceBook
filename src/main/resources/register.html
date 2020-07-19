@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:padding="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+<form action="/register" method="post" th:object="${user}">
+    <DIV ALIGN="CENTER"><h1> CREATE ACCOUNT</h1></DIV>
+    <div style="padding-left: 20%;padding-top: 5%">
+        <table>
+            <tr>
+                <td style="text-align:right">
+                    Username:
+                </td>
+                <td style="padding-left: 5%"><input type="text" name="username" th:field="*{username}">
+                </td>
+            </tr>
+            <tr>
+
+                <td style="text-align:right">
+                    Email:
+                </td>
+                <td style="padding-left: 5%"><input type="email" name="email"></td>
+            </tr>
+            <tr>
+                <td style="text-align:right">
+                    Password:
+                </td>
+                <td style="padding-left: 5%"><input type="password" name="password">
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right">
+                    Repeat Password:
+                </td>
+                <td style="padding-left: 5%"><input type="password" name="passwordRepeat">
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right">
+                    Age:
+                </td>
+                <td style="padding-left: 5%"><input type="text" name="age">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Register">
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
