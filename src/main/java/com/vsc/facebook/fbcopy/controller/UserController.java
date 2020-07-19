@@ -29,7 +29,7 @@ public class UserController extends BaseController {
 
     @PreAuthorize("!isAuthenticated()")
     @GetMapping("/register")
-    public ModelAndView register(@ModelAttribute("email") RegisterDTO registerDTO) {
+    public ModelAndView register(@ModelAttribute("user") RegisterDTO registerDTO) {
         return send("register");
     }
 
