@@ -24,15 +24,15 @@ public class UserController extends BaseController{
 
     @PreAuthorize("!isAuthenticated()")
     @GetMapping("/register")
-    public ModelAndView register(@ModelAttribute("user") RegisterDTO registerDTO) {
+    public ModelAndView register(@ModelAttribute("email") RegisterDTO registerDTO) {
         return send("register");
     }
 
     @PreAuthorize("!isAuthenticated()")
     @PostMapping("/register")
-    public ModelAndView register(@Validated @ModelAttribute("user") RegisterDTO registerDTO, BindingResult result, RedirectAttributes redirectAttributes) {
+    public ModelAndView register(@Validated @ModelAttribute("email") RegisterDTO registerDTO, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("user", registerDTO);
+            redirectAttributes.addFlashAttribute("email", registerDTO);
             return redirect("register");
         }
 

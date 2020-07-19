@@ -1,6 +1,7 @@
 package com.vsc.facebook.fbcopy.service.implementation;
 
 import com.vsc.facebook.fbcopy.dto.RegisterDTO;
+import com.vsc.facebook.fbcopy.entity.Role;
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.repository.UserRepository;
 import com.vsc.facebook.fbcopy.service.contract.UserService;
@@ -9,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -29,8 +33,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new IllegalArgumentException("Passwords do not match");
         }
         User user = new User();
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
-            //TODO user !
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.getUserRole());
+        user.setAuthorities(roles);
+        userRepository.save(user);
 
         return user;
     }
