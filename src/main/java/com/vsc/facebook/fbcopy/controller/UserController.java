@@ -30,7 +30,6 @@ public class UserController extends BaseController {
         this.userService = userService;
     }
 
-
     @GetMapping("/register")
     public ModelAndView register(@ModelAttribute("user") RegisterDTO registerDTO) {
         return send("register");

@@ -1,6 +1,7 @@
 package com.vsc.facebook.fbcopy.service.implementation;
 
 import com.vsc.facebook.fbcopy.dto.RegisterDTO;
+import com.vsc.facebook.fbcopy.entity.Image;
 import com.vsc.facebook.fbcopy.entity.Role;
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.repository.UserRepository;
@@ -51,5 +52,22 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
         return user;
     }
+    public User findByEmail(String username) throws UsernameNotFoundException {
+        User user = userRepository.findFirstByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found; with username: " + username));
+
+        return user;
+    }
+
+    public void setProfileImage(String email,String link){
+
+        User user=findByEmail(email);
+        Image image=new Image();
+        image.setUrl(link);
+        user.getProfile().setProfileImage(image);
+        userRepository.save(user);
+    }
+
+
 }
 
