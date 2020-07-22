@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:padding="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+<form action="/profile" method="post" th:object="">
+    <DIV ALIGN="CENTER"><h1> PROFILE PAGE</h1></DIV>
+    <div style="padding-left: 20%;padding-top: 5%">
+        <table style="/*border: black;border-style: double;border-size:10px*/">
+
+            <tr style="">
+                <td style="">
+                    First Name:
+                </td>
+                <td style=""><input type="text" th:field=""  name="firstname" >
+                </td>
+
+            </tr>
+            <tr>
+                <td style="">
+                    Last Name:
+                </td>
+                <td style=""><input type="text" value="user.lastName" name="lastname" th:field="">
+                </td>
+            </tr>
+            <tr>
+
+                <td style="">
+                    Email:
+                </td>
+                <td style=""><input type="email" value="" name="email"></td>
+            </tr>
+            <tr>
+                <td style="">
+                    Age:
+                </td>
+                <td style=""><input type="text" value="" name="age">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td style=""> Avatar</td>
+            </tr>
+            <tr>
+                <td style="" name="avatar"><img src="avatar.png"></td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Save">
+                </td>
+            </tr>
+          <!--  /* TODO */-->
+            <tr> <td>====================================================================</td>  </tr>
+            <tr><td> POSTS </td></tr>
+            <tr> <td>====================================================================</td>  </tr>
+            <tr><td> IMAGES </td></tr>
+            <tr> <td>====================================================================</td>  </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>

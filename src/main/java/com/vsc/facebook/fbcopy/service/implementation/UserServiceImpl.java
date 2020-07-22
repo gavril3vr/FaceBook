@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
             throw new IllegalArgumentException("Passwords do not match");
         }
 
-        User user = new User();
+        com.vsc.facebook.fbcopy.entity.User user = new com.vsc.facebook.fbcopy.entity.User();
         user.setFirstName(registerDTO.getUsername());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setEmail(registerDTO.getEmail());
