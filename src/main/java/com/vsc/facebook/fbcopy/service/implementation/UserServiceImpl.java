@@ -1,5 +1,6 @@
 package com.vsc.facebook.fbcopy.service.implementation;
 
+import com.vsc.facebook.fbcopy.dto.ProfilePageDTO;
 import com.vsc.facebook.fbcopy.dto.RegisterDTO;
 import com.vsc.facebook.fbcopy.entity.Role;
 import com.vsc.facebook.fbcopy.entity.User;
@@ -22,12 +23,24 @@ public class UserServiceImpl implements UserService, UserDetailsService{
     private final RoleServiceImpl roleService;
     private final BCryptPasswordEncoder passwordEncoder;
 
+
     @Autowired
     public UserServiceImpl(UserRepository userRepository, RoleServiceImpl roleService, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
+
     }
+    @Override
+    public com.vsc.facebook.fbcopy.entity.User getUserDetails(ProfilePageDTO profilePageDTO){
+        com.vsc.facebook.fbcopy.entity.User user = new com.vsc.facebook.fbcopy.entity.User();
+        user.setFirstName(profilePageDTO.getFirstName());
+        user.setLastName(profilePageDTO.getLastName());
+        user.setAge(Integer.parseInt(profilePageDTO.getAge()));
+        user.setEmail(profilePageDTO.getEmail());
+        return user;
+    }
+
 
     @Override
     public com.vsc.facebook.fbcopy.entity.User register(RegisterDTO registerDTO) {
@@ -35,7 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
             throw new IllegalArgumentException("Passwords do not match");
         }
 
-        User user = new User();
+        com.vsc.facebook.fbcopy.entity.User user = new com.vsc.facebook.fbcopy.entity.User();
         user.setFirstName(registerDTO.getUsername());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setEmail(registerDTO.getEmail());
