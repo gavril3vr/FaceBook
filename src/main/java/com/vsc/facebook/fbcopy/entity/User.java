@@ -19,7 +19,7 @@ public class User implements UserDetails {
 
     @Column(name = "password", nullable = false, unique = true)
     private String password;
-    
+
     @Column(name = "is_active", nullable = false, unique = true)
 
     private boolean isActive;

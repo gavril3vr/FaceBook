@@ -14,7 +14,13 @@ public class RegisterDTO {
     private String passwordRepeat;
 
     @NotBlank
-    private int age;
+    private Integer age;
+
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
 
     public RegisterDTO() {
     }
@@ -32,10 +38,25 @@ public class RegisterDTO {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getPassword() {
         return password;
