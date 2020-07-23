@@ -20,7 +20,6 @@ import java.security.Principal;
 import java.util.List;
 
 
-
 @Controller
 public class UserController extends BaseController {
     private final UserService userService;
@@ -51,9 +50,10 @@ public class UserController extends BaseController {
         return send("login");
     }
 
+    @PreAuthorize("!isAuthenticated()")
     @GetMapping("/profile")
     public ModelAndView profile(Principal principal) {
-        return send("profile", "username", principal.getName());
+        return send("profile");
     }
 
     @GetMapping("/my-page")

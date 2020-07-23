@@ -25,17 +25,6 @@ public class ProfileController extends BaseController {
         this.userService=userService;
     }
 
-    @GetMapping("/profile")
-    public ModelAndView setProfilePage() {
-        return send("profile");
-    }
-
-    @PostMapping("/profile")
-    public ModelAndView setProfilePicture(@ModelAttribute ImageUploadDTO imageUploadDTO) throws IOException {
-        imageUploadService.uploadImage(imageUploadDTO.getImage());
-        return redirect("profile");
-    }
-
     @PostMapping("/profile/image")
     public ModelAndView imageUpload(@ModelAttribute ImageUploadDTO imageUploadDTO, Principal principal) throws IOException {
 

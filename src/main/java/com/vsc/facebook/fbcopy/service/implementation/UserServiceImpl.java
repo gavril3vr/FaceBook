@@ -2,6 +2,7 @@ package com.vsc.facebook.fbcopy.service.implementation;
 
 import com.vsc.facebook.fbcopy.dto.RegisterDTO;
 import com.vsc.facebook.fbcopy.entity.Image;
+import com.vsc.facebook.fbcopy.entity.Profile;
 import com.vsc.facebook.fbcopy.entity.Role;
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.repository.UserRepository;
@@ -41,6 +42,10 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setEmail(registerDTO.getEmail());
         user.setAge(registerDTO.getAge());
+        userRepository.save(user);
+        user.setProfile(new Profile());
+        user.getProfile().setProfileImage(new Image());
+        user.getProfile().getProfileImage().setUrl("");
         userRepository.save(user);
         return user;
     }

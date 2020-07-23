@@ -16,7 +16,6 @@ public class RegisterDTO {
     @NotBlank
     private String email;
 
-    @NotBlank
     private int age;
 
     public String getEmail() {

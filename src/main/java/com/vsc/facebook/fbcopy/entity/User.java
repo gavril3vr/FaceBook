@@ -17,16 +17,16 @@ public class User implements UserDetails {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false, unique = true)
+    @Column(name = "password", nullable = false, unique = false)
     private String password;
 
-    @Column(name = "is_active", nullable = false, unique = true)
+    @Column(name = "is_active", nullable = false, unique = false)
     private boolean isActive;
 
-    @Column(name = "first_name", nullable = false, unique = true)
+    @Column(name = "first_name", nullable = false, unique = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, unique = true)
+    @Column(name = "last_name", nullable = false, unique = false)
     private String lastName;
 
     @Column(name = "age", nullable = false)
@@ -163,22 +163,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setPassword(String password) {

@@ -31,4 +31,10 @@ public class ImageController extends BaseController {
         return send("upload");
     }
 
+    @PostMapping("/upload")
+    public ModelAndView imageUpload(@ModelAttribute ImageUploadDTO imageUploadDTO) throws IOException, DbxException {
+        imageUploadService.uploadImage(imageUploadDTO.getImage());
+        imageUploadService.uploadToDropbox(imageUploadDTO);
+        return redirect("/");
+    }
 }
