@@ -6,8 +6,8 @@
     <title>Register</title>
 </head>
 <body>
-
-<form action="/profile" method="post" th:object="">
+<!--@thymesVar id="user" type="com.vsc.facebook.fbcopy.entity.User"-->
+<form action="/profile" method="post" th:object="${user}">
     <DIV ALIGN="CENTER"><h1> PROFILE PAGE</h1></DIV>
     <div style="padding-left: 20%;padding-top: 5%">
         <table style="/*border: black;border-style: double;border-size:10px*/">
@@ -16,7 +16,7 @@
                 <td style="">
                     First Name:
                 </td>
-                <td style=""><input type="text" th:field=""  name="firstname" >
+                <td style=""><input type="text" th:field="${user.getFirstName()}"  name="firstname" >
                 </td>
 
             </tr>
@@ -24,7 +24,7 @@
                 <td style="">
                     Last Name:
                 </td>
-                <td style=""><input type="text" value="user.lastName" name="lastname" th:field="">
+                <td style=""><input type="text" name="lastname" th:field="${user.getLastName()}">
                 </td>
             </tr>
             <tr>
@@ -32,13 +32,13 @@
                 <td style="">
                     Email:
                 </td>
-                <td style=""><input type="email" value="" name="email"></td>
+                <td style=""><input type="email" th:field="${user.getEmail()}" name="email"></td>
             </tr>
             <tr>
                 <td style="">
                     Age:
                 </td>
-                <td style=""><input type="text" value="" name="age">
+                <td style=""><input type="text" th:field="${user.getAge()}" name="age">
                 </td>
             </tr>
 
@@ -56,7 +56,7 @@
                     <input type="submit" value="Save">
                 </td>
             </tr>
-          <!--  /* TODO */-->
+          <!--  /* TODO avatar / posts / images -->
             <tr> <td>====================================================================</td>  </tr>
             <tr><td> POSTS </td></tr>
             <tr> <td>====================================================================</td>  </tr>

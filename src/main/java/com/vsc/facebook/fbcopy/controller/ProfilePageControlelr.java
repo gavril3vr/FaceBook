@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProfilePageControlelr extends BaseController {
- /*   private final UserService userService;
+    private final UserService userService;
 
     @Autowired
     public ProfilePageControlelr(UserService userService) {
         this.userService = userService;
     }
     @GetMapping("/profile")
-    public ModelAndView getUserDetails(@ModelAttribute("user")ProfilePageDTO profilePageDTO){return send("profile");}*/
+    public ModelAndView getUserDetails(@ModelAttribute("user")ProfilePageDTO profilePageDTO){return send("profile");}
 }
