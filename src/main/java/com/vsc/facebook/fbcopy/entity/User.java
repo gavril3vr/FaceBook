@@ -63,8 +63,8 @@ public class User implements UserDetails {
     @ManyToMany
     private Set<User> blockedBy;
 
-    @Column(name = "register_date")
-    private Date registerDate;
+//    @Column(name = "register_date")
+//    private Date registerDate;
 
     @OneToMany(mappedBy = "poster", fetch = FetchType.LAZY)
     private Set<Post> posts;
@@ -234,13 +234,13 @@ public class User implements UserDetails {
         this.blockedUsers = blockedUsers;
     }
 
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
+//    public Date getRegisterDate() {
+//        return registerDate;
+//    }
+//
+//    public void setRegisterDate(Date registerDate) {
+//        this.registerDate = registerDate;
+//    }
 
     public Set<Post> getPosts() {
         return posts;
