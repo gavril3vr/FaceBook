@@ -5,5 +5,5 @@ import com.vsc.facebook.fbcopy.entity.User;
 
 public interface UserService {
 
-    User register(RegisterDTO registerDTO);
+    User register(RegisterDTO registerDTO, User user);
 }

@@ -2,6 +2,7 @@ package com.vsc.facebook.fbcopy.controller;
 
 
 import com.vsc.facebook.fbcopy.dto.RegisterDTO;
+import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.service.contract.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.security.Principal;
 @Controller
 public class UserController extends BaseController {
     private final UserService userService;
+    private User user;
 
     @Autowired
     public UserController(UserService userService) {
@@ -38,7 +40,7 @@ public class UserController extends BaseController {
             return redirect("register");
         }
 
-        userService.register(registerDTO);
+        userService.register(registerDTO, user);
         return redirect("login");
     }
 
