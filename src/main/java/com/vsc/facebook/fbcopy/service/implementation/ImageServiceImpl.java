@@ -3,12 +3,12 @@ package com.vsc.facebook.fbcopy.service.implementation;
 import com.vsc.facebook.fbcopy.entity.Image;
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.repository.ImageRepository;
-import com.vsc.facebook.fbcopy.repository.ProfileRepository;
+import com.vsc.facebook.fbcopy.service.contract.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ImageServiceImpl implements ImageService{
+public class ImageServiceImpl implements ImageService {
 
     private final ImageRepository imageRepository;
 

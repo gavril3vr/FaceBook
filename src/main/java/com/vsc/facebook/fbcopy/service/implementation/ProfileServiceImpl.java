@@ -1,10 +1,9 @@
 package com.vsc.facebook.fbcopy.service.implementation;
 
-import com.vsc.facebook.fbcopy.entity.Image;
 import com.vsc.facebook.fbcopy.entity.Profile;
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.repository.ProfileRepository;
-import com.vsc.facebook.fbcopy.repository.RoleRepository;
+import com.vsc.facebook.fbcopy.service.contract.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

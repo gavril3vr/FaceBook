@@ -1,4 +1,4 @@
-package com.vsc.facebook.fbcopy.service.implementation;
+package com.vsc.facebook.fbcopy.service.contract;
 
 import com.vsc.facebook.fbcopy.entity.Profile;
 import com.vsc.facebook.fbcopy.entity.User;
