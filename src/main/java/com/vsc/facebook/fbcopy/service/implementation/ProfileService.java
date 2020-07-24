@@ -5,5 +5,5 @@ import com.vsc.facebook.fbcopy.entity.User;
 
 public interface ProfileService {
 
-     Profile createProfile();
+     Profile createProfile(User user);
 }

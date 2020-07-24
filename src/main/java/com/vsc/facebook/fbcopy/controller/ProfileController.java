@@ -5,6 +5,7 @@ import com.vsc.facebook.fbcopy.dto.ImageUploadDTO;
 import com.vsc.facebook.fbcopy.service.implementation.ImageUploadService;
 import com.vsc.facebook.fbcopy.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,9 +23,10 @@ public class ProfileController extends BaseController {
     @Autowired
     public ProfileController(ImageUploadService imageUploadService, UserService userService) {
         this.imageUploadService = imageUploadService;
-        this.userService=userService;
+        this.userService = userService;
     }
 
+    @PreAuthorize("isAuthenticated")
     @PostMapping("/profile/image")
     public ModelAndView imageUpload(@ModelAttribute ImageUploadDTO imageUploadDTO, Principal principal) throws IOException {
 

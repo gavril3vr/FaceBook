@@ -22,7 +22,7 @@ import java.util.UUID;
 @Service
 public class ImageUploadService {
 
-    private static final String ACCESS_TOKEN = "ckQic8_y_2AAAAAAAAAAFOACZL4iUrYYmEObYmnR2SP1qncWSRZi5lMAEtLqc56v" ;
+    private static final String ACCESS_TOKEN = "ckQic8_y_2AAAAAAAAAAHNp7ArDWwevTOz_E0sRUGBYsXRdMVVtID8jEsnDiyqFJ" ;
     private DbxRequestConfig config = DbxRequestConfig.newBuilder("dropbox/Facebook1914").build();
     private DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
     private final ProfileRepository profileRepository;
