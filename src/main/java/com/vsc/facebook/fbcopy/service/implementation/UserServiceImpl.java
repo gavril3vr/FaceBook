@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         userRepository.save(user);
         user.setProfile(new Profile());
         user.getProfile().setProfileImage(new Image());
-        user.getProfile().getProfileImage().setUrl("");
+        user.getProfile().getProfileImage().setUrl("https://www.dropbox.com/h?preview=%D0%B8%D0%B7%D1%82%D0%B5%D0%B3%D0%BB%D0%B5%D0%BD+%D1%84%D0%B0%D0%B9%D0%BB.jpg");
         userRepository.save(user);
         return user;
     }

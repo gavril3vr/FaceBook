@@ -6,6 +6,8 @@ import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.service.implementation.ImageUploadService;
 import com.vsc.facebook.fbcopy.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +27,13 @@ public class ImageController extends BaseController {
         this.imageUploadService = imageUploadService;
         this.userService = userService;
     }
+
+//    @PreAuthorize("isAuthenticated()")
+//    @GetMapping("/profile")
+//    public ModelAndView profile(@AuthenticationPrincipal User user) {
+//        String url = user.getProfile().getProfileImage().getUrl();
+//        return send("profile", "profilePicture", url);
+//    }
 
     @GetMapping("/upload")
     public ModelAndView imageUpload() {
