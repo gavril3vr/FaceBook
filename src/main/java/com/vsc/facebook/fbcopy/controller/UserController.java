@@ -5,6 +5,7 @@ import com.vsc.facebook.fbcopy.dto.RegisterDTO;
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.service.contract.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
-
 @Controller
 public class UserController extends BaseController {
     private final UserService userService;
@@ -26,7 +26,6 @@ public class UserController extends BaseController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
 
     @GetMapping("/register")
     public ModelAndView register(@ModelAttribute("user") RegisterDTO registerDTO) {
@@ -49,9 +48,10 @@ public class UserController extends BaseController {
         return send("login");
     }
 
+    @PreAuthorize("!isAuthenticated()")
     @GetMapping("/profile")
     public ModelAndView profile(Principal principal) {
-        return send("profile", "username", principal.getName());
+        return send("profile");
     }
 
     @GetMapping("/my-page")
