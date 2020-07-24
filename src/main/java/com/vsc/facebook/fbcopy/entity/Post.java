@@ -3,6 +3,7 @@ package com.vsc.facebook.fbcopy.entity;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -20,7 +21,7 @@ public class Post {
     private String post;
 
     @Column(name = "post_date", nullable = false)
-    private String postDate;
+    private Date postDate;
 
     @ManyToOne(targetEntity = Post.class, optional = false)
     private Post parent;
@@ -67,11 +68,11 @@ public class Post {
         this.post = post;
     }
 
-    public String getPostDate() {
+    public Date getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(String postDate) {
+    public void setPostDate(Date postDate) {
         this.postDate = postDate;
     }
 
