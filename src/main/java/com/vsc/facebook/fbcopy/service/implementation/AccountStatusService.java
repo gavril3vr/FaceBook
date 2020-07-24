@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountStatusService {
     private final UserRepository userRepository;
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public AccountStatusService(UserRepository userRepository, UserServiceImpl userService) {
+    public AccountStatusService(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
         this.userService = userService;
     }

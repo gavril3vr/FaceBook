@@ -1,15 +1,15 @@
 package com.vsc.facebook.fbcopy.config;
 
-import com.vsc.facebook.fbcopy.service.implementation.UserServiceImpl;
+import com.vsc.facebook.fbcopy.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public WebSecurityConfiguration(UserServiceImpl userService) {
+    public WebSecurityConfiguration(UserService userService) {
         this.userService = userService;
     }
 
