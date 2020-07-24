@@ -1,6 +1,4 @@
 package com.vsc.facebook.fbcopy.controller;
-
-
 import com.vsc.facebook.fbcopy.dto.RegisterDTO;
 import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.service.contract.UserService;
@@ -19,6 +17,7 @@ import java.security.Principal;
 
 @Controller
 public class UserController extends BaseController {
+
     private final UserService userService;
     private User user;
 
@@ -27,10 +26,14 @@ public class UserController extends BaseController {
         this.userService = userService;
     }
 
+
+
+    @PreAuthorize("!isAuthenticated()")
     @GetMapping("/register")
     public ModelAndView register(@ModelAttribute("user") RegisterDTO registerDTO) {
         return send("register");
     }
+
 
     @PostMapping("/register")
     public ModelAndView register(@Validated @ModelAttribute("user") RegisterDTO registerDTO, BindingResult result, RedirectAttributes redirectAttributes) {
@@ -39,9 +42,10 @@ public class UserController extends BaseController {
             return redirect("register");
         }
 
-        userService.register(registerDTO, user);
+        userService.register(registerDTO);
         return redirect("login");
     }
+
 
     @GetMapping("/login")
     public ModelAndView login() {
@@ -58,4 +62,5 @@ public class UserController extends BaseController {
     public ModelAndView myPage() {
         return send("profile");
     }
+
 }

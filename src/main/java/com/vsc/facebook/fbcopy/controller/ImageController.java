@@ -2,6 +2,7 @@ package com.vsc.facebook.fbcopy.controller;
 
 import com.dropbox.core.DbxException;
 import com.vsc.facebook.fbcopy.dto.ImageUploadDTO;
+import com.vsc.facebook.fbcopy.service.contract.UserService;
 import com.vsc.facebook.fbcopy.service.implementation.ImageUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

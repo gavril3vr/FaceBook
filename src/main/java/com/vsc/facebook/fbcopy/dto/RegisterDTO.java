@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 public class RegisterDTO {
 
     @NotBlank
-    private String username;
+    private String email;
 
     @NotBlank
     private String password;
@@ -14,9 +14,16 @@ public class RegisterDTO {
     private String passwordRepeat;
 
     @NotBlank
-    private String email;
+    private Integer age;
 
-    private int age;
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
+
+    public RegisterDTO() {
+    }
 
     public String getEmail() {
         return email;
@@ -26,23 +33,29 @@ public class RegisterDTO {
         this.email = email;
     }
 
+
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public RegisterDTO() {
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {

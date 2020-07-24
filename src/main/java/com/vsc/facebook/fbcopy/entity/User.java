@@ -21,6 +21,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "is_active", nullable = false, unique = false)
+
     private boolean isActive;
 
     @Column(name = "first_name", nullable = false, unique = false)
@@ -43,7 +44,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "profile_id")
     private Profile profile;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Image> images;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "connections")
@@ -55,7 +56,7 @@ public class User implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "friend_id")})
     private Set<User> connections;
 
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "blockedBy")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "blockedBy")
     private Set<User> blockedUsers;
     @JoinTable(name = "blocked_users",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -81,11 +82,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "requested", fetch = FetchType.LAZY)
     private Set<FriendRequestEntity> otherRequest;
 
-    private String username = firstName+" "+lastName;
+
     public User() {
 
     }
-    public String setUsername(String username){return  username;}
+
 
     public String getFirstName() {
         return firstName;
@@ -158,7 +159,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -178,15 +179,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     public void setActive(boolean active) {
@@ -267,4 +264,3 @@ public class User implements UserDetails {
     }
 
 }
-

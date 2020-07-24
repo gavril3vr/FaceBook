@@ -2,9 +2,12 @@ package com.vsc.facebook.fbcopy.service.implementation;
 
 import com.vsc.facebook.fbcopy.dto.AccountStatusDTO;
 import com.vsc.facebook.fbcopy.entity.User;
+import com.vsc.facebook.fbcopy.exception.InvalidUserException;
 import com.vsc.facebook.fbcopy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AccountStatusService {
@@ -17,12 +20,13 @@ public class AccountStatusService {
         this.userService = userService;
     }
 
-    public boolean isPassValid(AccountStatusDTO accountStatusDTO) {
-        User user = userRepository.findFirstByEmail(accountStatusDTO.getEmail());
+    public boolean isPassValid(AccountStatusDTO accountStatusDTO) throws InvalidUserException {
+        User user = userRepository.findFirstByEmail(accountStatusDTO.getEmail()).orElseThrow(()-> new InvalidUserException("Invalid User"));
+
         return user.getPassword().equals(accountStatusDTO.getPasswordToBeChecked());
     }
 
-    public void deactivateAccount(AccountStatusDTO accountStatusDTO, User user) throws IllegalAccessException //throws CustomExceptionHandler
+    public void deactivateAccount(AccountStatusDTO accountStatusDTO, User user) throws IllegalAccessException, InvalidUserException //throws CustomExceptionHandler
     {
         if (isPassValid(accountStatusDTO)) {
             user.setActive(false);
@@ -31,7 +35,7 @@ public class AccountStatusService {
             throw new IllegalAccessException();
     }
 
-    public void activateAccount(AccountStatusDTO accountStatusDTO, User user) throws IllegalAccessException //throws CustomExceptionHandler
+    public void activateAccount(AccountStatusDTO accountStatusDTO, User user) throws IllegalAccessException, InvalidUserException //throws CustomExceptionHandler
     {
         if (isPassValid(accountStatusDTO)) {
             user.setActive(true);
