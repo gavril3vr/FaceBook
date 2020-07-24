@@ -6,4 +6,8 @@ import com.vsc.facebook.fbcopy.entity.User;
 public interface UserService {
 
     User register(RegisterDTO registerDTO);
+
+
+    void setProfileImage(String name, String link);
+
 }

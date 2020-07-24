@@ -1,6 +1,6 @@
 package com.vsc.facebook.fbcopy.controller;
-
 import com.vsc.facebook.fbcopy.dto.RegisterDTO;
+import com.vsc.facebook.fbcopy.entity.User;
 import com.vsc.facebook.fbcopy.service.contract.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,16 +15,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
-
 @Controller
 public class UserController extends BaseController {
 
     private final UserService userService;
+    private User user;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 
 
     @PreAuthorize("!isAuthenticated()")
@@ -51,9 +52,10 @@ public class UserController extends BaseController {
         return send("login");
     }
 
+    @PreAuthorize("!isAuthenticated()")
     @GetMapping("/profile")
     public ModelAndView profile(Principal principal) {
-        return send("profile", "username", principal.getName());
+        return send("profile");
     }
 
     @GetMapping("/my-page")

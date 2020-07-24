@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form action="/register" method="post" th:object="${user}">
+<form action="/register" method="post" >
     <DIV ALIGN="CENTER"><h1> CREATE ACCOUNT</h1></DIV>
     <div style="padding-left: 20%;padding-top: 5%">
         <table>
@@ -15,7 +15,7 @@
                 <td style="text-align:right">
                     Username:
                 </td>
-                <td style="padding-left: 5%"><input type="text" name="username" th:field="*{username}">
+                <td style="padding-left: 5%"><input type="text" name="username">
                 </td>
             </tr>
             <tr>
