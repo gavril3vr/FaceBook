@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (!registerDTO.getPassword().equals(registerDTO.getPasswordRepeat())) {
             throw new IllegalArgumentException("Passwords do not match");
         }
-        if (registerDTO.getEmail().equals(userRepository.existsUserByEmail())) {
+        if (userRepository.existsByEmail(registerDTO.getEmail())) {
             throw new IllegalArgumentException("user already exists");
         }
 
